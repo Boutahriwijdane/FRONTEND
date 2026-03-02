@@ -1,0 +1,55 @@
+.main {
+  flex: 1; 
+  background-color: #F8F9FA;
+  padding: 24px;
+  overflow-x: auto; 
+}
+
+.board {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; 
+  min-height: 100%;
+}
+
+.column {
+  width: 300px;
+  flex-shrink: 0; 
+  background-color: #EBEDF0; 
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.colTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #4A5568;
+  margin: 4px 0 8px 8px;
+  text-transform: capitalize;
+}
+
+.card {
+  background-color: white;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 0.95rem;
+  color: #2D3748;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: #1B8C3E;
+}
+
+.card:active {
+  cursor: grabbing;
+}

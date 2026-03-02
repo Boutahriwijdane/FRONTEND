@@ -1,0 +1,20 @@
+Partie 1 :
+Q1) Dans un projet Vite + React, le <body> contient généralement une <div id="root"></div> qui sert de point de montage 
+à l’application React, ainsi qu’un script (main.tsx) qui initialise l’application et permet le rendu côté client (CSR).
+- Le CSR (Client Side Rendering) signifie que le serveur envoie une page HTML presque vide, puis React, via main.tsx, monte l’application dans <div id="root"> et génère toute l’interface dynamiquement côté navigateur.
+partie 2 :
+Q1) Les données en dur sont écrites directement dans le code et ne sont pas dynamiques, tandis qu’une API REST fournit
+des données depuis un serveur, permettant une mise à jour et une gestion plus réalistes et indépendantes du front-end.
+Parie 3 : 
+Q1) On utilise className en JSX parce que class est un mot réservé en JavaScript, et React utilise donc className 
+pour appliquer les classes CSS.
+Q2)La prop key permet à React d’identifier chaque élément de manière unique afin d’optimiser le rendu et d’éviter 
+des erreurs lors des mises à jour du DOM.
+Partie 4 : 
+Q1)Le useEffect s’exécute une seule fois au montage du composant car le tableau de dépendances est vide ([]).
+Q2)Si json-server est arrêté, les requêtes fetch échouent, une erreur apparaît dans la console et les données 
+ne s’affichent pas dans l’interface.
+Q3)Oui, on voit les requêtes GET vers localhost:4000 avec un code HTTP 200 si tout fonctionne correctement.
+Q4)Oui, après rechargement, useEffect relance les requêtes fetch, met à jour le state avec useState, puis React 
+re-render les composants avec les nouvelles données.
+Q5)Le flux est : db.json → json-server → fetch → useEffect → useState → re-render → props → composants → affichage UI.

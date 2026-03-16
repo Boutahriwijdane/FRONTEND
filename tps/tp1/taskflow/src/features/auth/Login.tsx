@@ -1,24 +1,32 @@
 // src/features/auth/Login.tsx 
   
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
+import { useNavigate, useLocation } from 'react-router-dom'; 
 import { useAuth } from './AuthContext'; 
+import api from '../../api/axios';
 import styles from './Login.module.css'; 
   
 export default function Login() { 
+  const navigate = useNavigate();
+  const location = useLocation();
   const { state, dispatch } = useAuth(); 
   const [email, setEmail] = useState(''); 
-  const [password, setPassword] = useState(''); 
+  const [password, setPassword] = useState('');
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const from = (location.state as any)?.from || '/dashboard';
+
+  useEffect(() => {
+    if (state.user) {
+      navigate (from , {replace: true});}
+  }, [state.user, navigate, from]);
   
   async function handleSubmit(e: React.FormEvent) { 
     e.preventDefault(); 
     dispatch({ type: 'LOGIN_START' }); 
   
-    try { 
-      const res = await fetch( 
-        `http://localhost:4000/users?email=${email}` 
-      ); 
-      const users = await res.json(); 
-  
+       try { 
+      const { data: users } = await api.get(`/users?email=${email}`); 
       if (users.length === 0 || users[0].password !== password) { 
         dispatch({ type: 'LOGIN_FAILURE', payload: 'Email ou mot de passe incorrect' }); 
         return; 

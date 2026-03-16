@@ -1,0 +1,56 @@
+.card{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border:1px solid #eee;
+  border-radius:8px;
+  background:white;
+}
+
+.colorDot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+}
+
+.name{
+  flex:1;
+  font-weight:500;
+}
+
+/* actions */
+.actions{
+  display:flex;
+  gap:8px;
+}
+
+/* bouton modifier */
+.editBtn{
+  border:1px solid orange;
+  background:transparent;
+  color:orange;
+  padding:4px 8px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* bouton supprimer */
+.deleteBtn{
+  border:1px solid red;
+  background:transparent;
+  color:red;
+  padding:4px 8px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.editBtn:hover{
+  background:orange;
+  color:white;
+}
+
+.deleteBtn:hover{
+  background:red;
+  color:white;
+}

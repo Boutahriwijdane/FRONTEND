@@ -1,20 +1,88 @@
+########## TP1:
 Partie 1 :
+
 Q1) Dans un projet Vite + React, le <body> contient généralement une <div id="root"></div> qui sert de point de montage 
 à l’application React, ainsi qu’un script (main.tsx) qui initialise l’application et permet le rendu côté client (CSR).
-- Le CSR (Client Side Rendering) signifie que le serveur envoie une page HTML presque vide, puis React, via main.tsx, monte l’application dans <div id="root"> et génère toute l’interface dynamiquement côté navigateur.
+
+- Le CSR (Client Side Rendering) signifie que le serveur envoie une page HTML presque vide, puis React, via main.tsx,
+ monte l’application dans <div id="root"> et génère toute l’interface dynamiquement côté navigateur.
+
 partie 2 :
+
 Q1) Les données en dur sont écrites directement dans le code et ne sont pas dynamiques, tandis qu’une API REST fournit
 des données depuis un serveur, permettant une mise à jour et une gestion plus réalistes et indépendantes du front-end.
+
 Parie 3 : 
+
 Q1) On utilise className en JSX parce que class est un mot réservé en JavaScript, et React utilise donc className 
 pour appliquer les classes CSS.
+
 Q2)La prop key permet à React d’identifier chaque élément de manière unique afin d’optimiser le rendu et d’éviter 
 des erreurs lors des mises à jour du DOM.
+
 Partie 4 : 
 Q1)Le useEffect s’exécute une seule fois au montage du composant car le tableau de dépendances est vide ([]).
+
 Q2)Si json-server est arrêté, les requêtes fetch échouent, une erreur apparaît dans la console et les données 
 ne s’affichent pas dans l’interface.
+
 Q3)Oui, on voit les requêtes GET vers localhost:4000 avec un code HTTP 200 si tout fonctionne correctement.
+
 Q4)Oui, après rechargement, useEffect relance les requêtes fetch, met à jour le state avec useState, puis React 
 re-render les composants avec les nouvelles données.
+
 Q5)Le flux est : db.json → json-server → fetch → useEffect → useState → re-render → props → composants → affichage UI.
+
+########## TP2:
+Q2)Cela vérifie que le composant est utilisé à l’intérieur de AuthProvider.Sinon le context 
+serait null et l’application pourrait crasher.
+
+Q3)Il faudrait passer le user en props depuis App vers tous les composants.
+
+Q4)Il empêche le rechargement de la page lors de l’envoi du formulaire.
+
+Q5)Cela retire le password de l’objet.On ne garde que les informations utiles du user pour des 
+raisons de sécurité.
+
+Q6)Pour séparer les responsabilités :
+App gère l’authentification, Dashboard gère l’interface de l’application.
+
+Q7) -Login avec email et password  -Dashboard s’affiche   -Cliquer sur Déconnexion   -Retour à la page Login
+
+Q8)Flux du callback logout
+Header -> onClick -> onLogout() -> dispatch({ type: 'LOGOUT' }) -> App re-render  -> Login affiché
+
+Q9)Parce que useLayoutEffect s’exécute avant que le navigateur affiche la page.
+
+Q10)Parce qu’il bloque le rendu du navigateur et peut ralentir l’application.
+
+#########TP3: 
+
+Q1)Parce que ProtectedRoute est un composant React. <Navigate /> permet de rediriger pendant le rendu du composant.
+
+Q2) navigate(from) :  ajoute une page dans l’historique
+navigate(from,{replace:true}) : remplace la page actuelle.donc le bouton Retour ne revient pas au login.
+
+Q3)Parce que : plus rapide , évite une requête serveur , React met à jour l’état local directement
+
+Q4)
+scénario	                         résultat
+/dashboard sans login	             redirection vers /login
+/projects/1 sans login	             redirection vers /login
+/nimportequoi	                     redirection /dashboard
+/	                                 redirection /dashboard
+connecté + bouton retour	         revient à la page précédente
+
+Q5)Link : navigation simple
+NavLink : navigation avec style actif
+
+Q6)Parce que le formulaire est le même :
+POST → créer projet
+PUT → modifier projet
+Seuls changent :
+les valeurs initiales
+la requête API
+
+Q7)oui. Axios lance une erreur réseau → le message d’erreur s’affiche.
+
+Q8)Axios lance automatiquement une erreur qui est capturée dans catch.Contrairement à fetch, qui ne lance pas d’erreur pour 404.

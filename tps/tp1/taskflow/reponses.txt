@@ -66,12 +66,13 @@ navigate(from,{replace:true}) : remplace la page actuelle.donc le bouton Retour 
 Q3)Parce que : plus rapide , évite une requête serveur , React met à jour l’état local directement
 
 Q4)
-scénario	                         résultat
-/dashboard sans login	             redirection vers /login
-/projects/1 sans login	             redirection vers /login
-/nimportequoi	                     redirection /dashboard
-/	                                 redirection /dashboard
-connecté + bouton retour	         revient à la page précédente
+scénario	                |        résultat
+____________________________|___________________________________
+/dashboard sans login	    |         redirection vers /login
+/projects/1 sans login	    |        redirection vers /login
+/nimportequoi	            |         redirection /dashboard
+/	                        |        redirection /dashboard
+connecté + bouton retour	|         revient à la page précédente
 
 Q5)Link : navigation simple
 NavLink : navigation avec style actif
@@ -86,3 +87,43 @@ la requête API
 Q7)oui. Axios lance une erreur réseau → le message d’erreur s’affiche.
 
 Q8)Axios lance automatiquement une erreur qui est capturée dans catch.Contrairement à fetch, qui ne lance pas d’erreur pour 404.
+
+
+########## TP4
+Q1) 0 ligne de css avec MUI , parce que tout est fait avec sx = {{}} , et pour Header.module.css j'avais besoin de plusieurs lignes 
+
+Q2) le code Bootstrap est plus lisisble est simple , alors que Mui est plus long mais plus structuré 
+
+Q3) je préfère MUI parce que le style est directement dans le code et facile a gérer
+
+
+| Critère                       | Material UI                             | React-Bootstrap     |
+| ----------------------------- | --------------------------------------- | ------------------- |
+| Installation                  | simple (plusieurs packages)             | Très simple         |
+| Nombre de composants utilisés | Plus élevé                              | Moins élevé         |
+| Lignes de CSS écrites         | 0 (avec sx)                             | Quelques lignes     |
+| Système de style              | sx={{}} (JS)                            | className (CSS)     |
+| Personnalisation couleurs     | Très facile                             | Moyenne             |
+| Responsive                    | Automatique                             | Facile avec classes |
+| Lisibilité du code            | Moyenne                                 | Bonne               |
+| Documentation                 | Très riche                              | Simple              |
+| Votre préférence              |               x                         |                     |
+
+Q4) je choisis MUI pour la production parce que plus moderne et personnalisable
+
+Schéma :  {React(navigateur): localhost: 5173}_______HTTP(GET,Post,..)____{Axios}______Http(port 4000)______{json-server}______{db.json}
+a)Firebase : {React}_____sdk firebase(https)_______{Firebase}
+b)Express + MongoDb : {React}______http(axios)_______{Expresse back api}__________{MongoDb}
+
+Q5) React ne peut pas se connecter directement a Mysql parce que Mysql est une base de données , react est coté client il faut un serveur intermédiaire 
+
+Q6) on n'utilise pas json-server en production parce que :  pas sécurisé et pas performant et just un CRUD simple
+
+Q7) Firebase permet la connection directe car il fournie une API sécurisée et il gère l'authentification
+
+Q8) Pour passer en production: 
+creer un vrai backend , utiliser une vraie base de données , ajouter l'authentification et sécurité
+
+Q9) Le risque d’utiliser MUI ou Bootstrap c'est : augmente la taille du projet et dépendance aux mises à jour
+
+Q10) Je choisis Firebase pour une app de chat parce que : rapide à développer , pas besoin de backend

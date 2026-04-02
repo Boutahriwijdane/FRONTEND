@@ -1,123 +1,35 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useAuth } from '../features/auth/AuthContext'
-import api from '../api/axios'
-//import Header from '../components/Header'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import type { RootState } from '../store'
+import { logout } from '../features/auth/authSlice'
+
 import Sidebar from '../components/Sidebar'
 import MainContent from '../components/MainContent'
 import ProjectForm from '../components/ProjectForm'
-import styles from './Dashboard.module.css'
-import ProjectCard from '../components/ProjectCard';
-//import HeaderMUI from '../components/HeaderMUI'
+import ProjectCard from '../components/ProjectCard'
 import HeaderBS from '../components/HeaderBS'
+import styles from './Dashboard.module.css'
 
-interface Project { id: string; name: string; color: string }
-interface Column { id: string; title: string; tasks: string[] }
+import useProjects from '../hooks/useProjects'
 
 export default function Dashboard() {
+  console.log('Dashboard re-render')
 
-  const { state: authState, dispatch } = useAuth()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state: RootState) => state.auth)
+
+  const {
+    projects,
+    columns,
+    loading,
+    error,
+    addProject,
+    renameProject,
+    deleteProject
+  } = useProjects()
 
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [projects, setProjects] = useState<Project[]>([])
-  const [columns, setColumns] = useState<Column[]>([])
-  const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
-
-  const [error, setError] = useState<string | null>(null)
-  const [saving, setSaving] = useState(false)
-
-  // GET
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [projRes, colRes] = await Promise.all([
-          api.get('/projects'),
-          api.get('/columns')
-        ])
-
-        setProjects(projRes.data)
-        setColumns(colRes.data)
-
-      } catch (e) {
-        console.error(e)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  // POST
-  async function addProject(name: string, color: string) {
-
-    setSaving(true)
-    setError(null)
-
-    try {
-
-      const { data } = await api.post('/projects', { name, color })
-
-      setProjects(prev => [...prev, data])
-
-    } catch (err) {
-
-      if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.message || `Erreur ${err.response?.status}`)
-      } else {
-        setError('Erreur inconnue')
-      }
-
-    } finally {
-      setSaving(false)
-    }
-  }
-
-  // PUT
-  async function renameProject(project: Project) {
-
-    const newName = prompt('Nouveau nom :', project.name)
-
-    if (!newName || newName.trim() === '' || newName === project.name) {
-      return
-    }
-
-    try {
-
-      const { data } = await api.put('/projects/' + project.id, {
-        ...project,
-        name: newName
-      })
-
-      setProjects(prev =>
-        prev.map(p => p.id === project.id ? data : p)
-      )
-
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  // DELETE
-  async function deleteProject(id: string) {
-
-    const confirmed = confirm('Êtes-vous sûr ?')
-
-    if (!confirmed) return
-
-    try {
-
-      await api.delete('/projects/' + id)
-
-      setProjects(prev =>
-        prev.filter(p => p.id !== id)
-      )
-
-    } catch (err) {
-      console.error(err)
-    }
-  }
 
   if (loading) return <div className={styles.loading}>Chargement...</div>
 
@@ -127,8 +39,8 @@ export default function Dashboard() {
       <HeaderBS
         title="TaskFlow"
         onMenuClick={() => setSidebarOpen(p => !p)}
-        userName={authState.user?.name}
-        onLogout={() => dispatch({ type: 'LOGOUT' })}
+        userName={user?.name}
+        onLogout={() => dispatch(logout())}
       />
 
       <div className={styles.body}>
@@ -138,21 +50,16 @@ export default function Dashboard() {
         <div className={styles.content}>
 
           <div className={styles.toolbar}>
-
             {error && <div className={styles.error}>{error}</div>}
 
             {!showForm ? (
-
               <button
                 className={styles.addBtn}
-                disabled={saving}
                 onClick={() => setShowForm(true)}
               >
                 + Nouveau projet
               </button>
-
             ) : (
-
               <ProjectForm
                 submitLabel="Créer"
                 onSubmit={(name, color) => {
@@ -161,26 +68,22 @@ export default function Dashboard() {
                 }}
                 onCancel={() => setShowForm(false)}
               />
-
             )}
-
           </div>
+
           <div className={styles.projectsSection}>
-
-  <h2>Projets</h2>
-
-  <div className={styles.projectList}>
-    {projects.map(p => (
-      <ProjectCard
-        key={p.id}
-        project={p}
-        onRename={renameProject}
-        onDelete={deleteProject}
-      />
-    ))}
-  </div>
-
-</div>
+            <h2>Projets</h2>
+            <div className={styles.projectList}>
+              {projects.map(p => (
+                <ProjectCard
+                  key={p.id}
+                  project={p}
+                  onRename={renameProject}
+                  onDelete={deleteProject}
+                />
+              ))}
+            </div>
+          </div>
 
           <MainContent columns={columns} />
 

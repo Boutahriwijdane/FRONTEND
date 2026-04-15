@@ -127,3 +127,47 @@ creer un vrai backend , utiliser une vraie base de données , ajouter l'authenti
 Q9) Le risque d’utiliser MUI ou Bootstrap c'est : augmente la taille du projet et dépendance aux mises à jour
 
 Q10) Je choisis Firebase pour une app de chat parce que : rapide à développer , pas besoin de backend
+
+
+########## TP5
+Q1)Non, le script ne s’exécute pas.
+React échappe les strings, donc le HTML est affiché comme texte.
+
+Q2)Le script s’exécute.
+dangerouslySetInnerHTML désactive la protection de React.
+
+Q3)Oui, on voit Authorization: Bearer ... dans Network.
+Axios ajoute automatiquement le token.
+
+Q4)On ne stocke pas dans localStorage car c’est vulnérable au XSS.
+Le state React est plus sécurisé.
+
+Q5)Redux Toolkit simplifie le code.
+On n’utilise plus switch/case et on modifie le state directement grâce à Immer.
+
+Q6) (re-render)
+Tous les composants se re-rendent, mais MainContent ne devrait pas.
+
+Q7)React.memo empêche le re-render si les props ne changent pas.
+
+Q8)useMemo mémorise une valeur.
+useCallback mémorise une fonction.
+
+Q10)
+a) Toggle sidebar
+Avant : Dashboard, Sidebar, MainContent
+Après : Dashboard, Sidebar
+
+b) Ajouter projet
+Dashboard et Sidebar se re-rendent (normal)
+
+c) Navigation
+Seul le nouveau composant se charge
+
+d) Logout
+Toute l’application se re-render (normal)
+
+Avant / Après
+
+Avant : plusieurs re-renders inutiles
+Après : moins de re-renders → meilleure performance

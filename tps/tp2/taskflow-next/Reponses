@@ -1,0 +1,44 @@
+Q1)
+Dans React, le routing est dans le code avec React Router, alors que dans Next.js, le routing se fait avec les dossiers (app/).
+
+Q2)
+On crée un seul fichier (page.tsx). En React, il faut composant + route + import → plus compliqué.
+
+Q3)
+En Next.js, l’id est récupéré avec params.
+La différence : React utilise un hook client, Next.js passe les données depuis le serveur.
+
+Q5)
+En React, on écrit plusieurs lignes (useState, useEffect, fetch…).
+En Next.js, seulement quelques lignes avec une fonction async.
+
+Q6)
+Non, on ne voit pas la requête dans Network.car elle est exécutée côté serveur, pas dans le navigateur.
+
+Q7)
+Login utilise useState et onSubmit → donc besoin de "use client".
+Dashboard est un affichage simple → reste Server Component.
+
+Q8)
+L’équivalent de useNavigate est useRouter() avec router.push().
+
+Q9)
+On voit seulement <div id="root"></div> sans contenu. les projets ne sont pas visibles dans le HTML.
+
+Q10)
+On voit directement les projets dans le HTML.car Next.js utilise SSR (le serveur génère la page).
+
+Q11)
+En React, on mettait le Header dans App.js pour qu’il reste affiché.
+
+Q12)
+On crée un fichier layout.tsx dans le dossier dashboard.
+
+Q13)
+Non, un Server Component ne peut pas utiliser onClick.car il s’exécute côté serveur.
+
+Q14)
+Non, on peut créer un petit composant client seulement pour le bouton.
+
+Q15)
+Le navigateur ne voit pas l’API → plus sécurisé. les requêtes sont faites côté serveur.

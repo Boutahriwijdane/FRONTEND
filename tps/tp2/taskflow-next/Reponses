@@ -42,3 +42,39 @@ Non, on peut créer un petit composant client seulement pour le bouton.
 
 Q15)
 Le navigateur ne voit pas l’API → plus sécurisé. les requêtes sont faites côté serveur.
+
+
+________________________________________________________________________________________
+TP2 : 
+
+Q1)En React SPA, après un POST il fallait utiliser setProjects pour mettre à jour l’affichage.
+alors que Next.js met à jour automatiquement grâce à revalidatePath.
+
+Q3)On utilise un <form> au lieu de onClick car le Dashboard est un Server Component.il ne peut pas utiliser de JavaScript côté client.
+
+Q4)On voit les données des projets en JSON dans le navigateur.C’est l’API qui retourne les projets.
+
+Q5)Une API Route est un endpoint accessible (GET, POST…).
+Une Server Action est utilisée directement dans un composant (formulaire).
+
+Q6)Il y a moins de useState qu’en React SPA.
+On utilise directement useActionState → code plus simple.
+
+Q7)Oui, on voit le cookie "session" dans l’onglet Application.
+Non, on ne peut pas le lire avec document.cookie car il est httpOnly.
+
+Q8)La page ne s’affiche pas du tout.
+Le middleware bloque l’accès avant le chargement → plus sécurisé.
+
+Q9)Le middleware est à la racine pour s’appliquer à toute l’application.
+
+Q10)En React SPA, on utilisait Context et useAuth pour stocker l’utilisateur.Alors que Next.js lit directement le cookie côté serveur.
+
+Q11)Server Actions → pour les formulaires simples.
+API Routes → pour une application externe (mobile).
+
+Q12)Next.js est plus sécurisé car le cookie est httpOnly et le middleware protège les routes.
+
+Q13)Oui, ça fonctionne sans json-server.Car Next.js utilise ses propres API Routes.
+
+Q14)Non, un script XSS ne peut pas lire le cookie.Car il est httpOnly

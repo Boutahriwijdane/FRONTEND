@@ -49,6 +49,11 @@
       "name": "crm",
       "color": "#3498db",
       "id": "eEYF5KT"
+    },
+    {
+      "id": "1776950206334",
+      "name": "crypto",
+      "color": "#5b34a2"
     }
   ],
   "columns": [

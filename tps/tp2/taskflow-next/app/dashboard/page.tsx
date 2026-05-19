@@ -3,10 +3,11 @@
 import AddProjectForm from './AddProjectForm';
 import { deleteProject } from '../actions/projects';
 import Link from 'next/link';
+import { prisma } from '@/lib/prisma';
 
 export default async function DashboardPage() {
-  const res = await fetch('http://localhost:4000/projects', { cache: 'no-store' });
-  const projects = await res.json();
+  
+  const projects = await prisma.project.findMany()
 
   return (
     <div style={{ padding: '2rem' }}>

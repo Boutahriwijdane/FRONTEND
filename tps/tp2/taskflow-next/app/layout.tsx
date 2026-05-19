@@ -2,7 +2,11 @@ import { cookies } from 'next/headers';
 import type { Metadata } from 'next'; 
 import './globals.css'; 
 import LogoutButton from './components/LogoutButton'; 
-  
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin']
+}); 
 export const metadata: Metadata = { 
   title: 'TaskFlow', 
   description: 'Gestion de projets collaboratifs', 

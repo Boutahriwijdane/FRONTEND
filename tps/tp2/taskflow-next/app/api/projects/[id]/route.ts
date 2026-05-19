@@ -1,45 +1,52 @@
 import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
-// ✅ GET
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const res = await fetch(`http://localhost:4000/projects/${params.id}`);
+  const { id } = await params;
 
-  if (!res.ok) {
-    return NextResponse.json({ error: 'Projet non trouvé' }, { status: 404 });
+  const project = await prisma.project.findUnique({
+    where: { id: Number(id) }
+  });
+
+  if (!project) {
+    return NextResponse.json(
+      { error: 'Projet non trouvé' },
+      { status: 404 }
+    );
   }
 
-  const data = await res.json();
-  return NextResponse.json(data);
+  return NextResponse.json(project);
 }
 
-// ✅ PUT
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const body = await request.json();
 
-  const res = await fetch(`http://localhost:4000/projects/${params.id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+  const project = await prisma.project.update({
+    where: { id: Number(id) },
+    data: { name: body.name }
   });
 
-  const data = await res.json();
-  return NextResponse.json(data);
+  return NextResponse.json(project);
 }
 
-// ✅ DELETE
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  await fetch(`http://localhost:4000/projects/${params.id}`, {
-    method: 'DELETE',
+  const { id } = await params;
+
+  await prisma.project.delete({
+    where: { id: Number(id) }
   });
 
-  return NextResponse.json({ message: 'Projet supprimé' });
+  return NextResponse.json({
+    message: 'Projet supprimé'
+  });
 }

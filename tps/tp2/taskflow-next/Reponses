@@ -78,3 +78,39 @@ Q12)Next.js est plus sécurisé car le cookie est httpOnly et le middleware prot
 Q13)Oui, ça fonctionne sans json-server.Car Next.js utilise ses propres API Routes.
 
 Q14)Non, un script XSS ne peut pas lire le cookie.Car il est httpOnly
+
+________________________________________________________________________________________
+TP3
+
+Q1)Oui, Prisma Studio affiche les données des tables Project et User dans une interface web.
+
+Q2)Le code Prisma est beaucoup plus court et plus simple que fs.readFileSync et JSON.parse.
+
+Q3)Oui, l’application fonctionne sans db.json car Prisma utilise SQLite directement.
+
+Q4)Le Server Component peut utiliser Prisma car il s’exécute côté serveur.
+Le Client Component ne peut pas accéder directement à la base de données.
+
+Q5)On ne voit presque aucune requête externe car Next.js optimise et héberge la police localement.
+
+Q6)Les pages sont générées au build.
+
+Q7)Oui, Next.js peut générer automatiquement les nouvelles pages après le build.
+
+Q8)L’application sera disponible avec une URL Vercel.
+
+Q9)
+____________________________________
+React SPA	           Next.js Full-Stack
+____________________________________
+React Router	       Routing App Router
+useEffect fetch	       Server fetch
+CRUD Axios	           Server Actions
+Context Auth	       Cookies + Middleware
+Express/MySQL	       Prisma + SQLite
+Déploiement séparé     Full-stack
+SEO faible	           SEO fort
+Plus lent	           Plus rapide
+_____________________________________________
+
+Q10)Je choisirais Next.js full-stack car il est plus rapide, plus moderne et plus sécurisé.
